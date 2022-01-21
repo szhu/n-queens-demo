@@ -1,0 +1,39 @@
+# Positive diagonals
+         i  j
+Q . . . (0, 0)
+. Q . . (1, 1)
+. . Q . (2, 2)
+. . . Q (3, 3)
+invariant: i - j = 0
+
+         i  j
+. . . Q (0, 3)
+. . . .
+. . . .
+. . . .
+invariant: i - j = -3
+
+         i  j
+. . . .
+. . . .
+. . . .
+Q . . . (3, 0)
+invariant: i - j = 3
+
+invariant: i - j = X
+posDiagLeft = { -3, -2, -1, 0, 1, 2, 3 }
+                -n+1        ...     n-1
+
+
+# Negative diagonals
+
+         i  j
+. . . Q (0, 3)
+. . Q . (1, 2)
+. Q . . (2, 1)
+Q . . . (3, 0)
+invariant: i + j = 3
+
+invariant: i + j = X
+negDiagLeft = { 0, 1, 2, 3, 4, 5, 6 }
+                0       ...      2(n-1)

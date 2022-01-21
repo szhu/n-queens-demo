@@ -1,0 +1,7 @@
+- Generate solutions to the n-rooks problem, one row at a time
+- For each new row:
+    - Check each column that isn't occupied yet
+        - Calculate the diagonal ids
+        - Make sure neither diagonal is occupied. Break otherwise
+        - Make a copy of the sets of remaining columns and diagonals
+        - Remove the column and diagonal ids we just used

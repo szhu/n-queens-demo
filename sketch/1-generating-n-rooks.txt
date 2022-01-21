@@ -1,0 +1,31 @@
+colsLeft = {0, 1, 2, 3}
+posDiagLeft = { what goes here? see next step }
+
+# Row 0 configuration
+
+Q . . .
+. . . .
+. . . .
+. . . .
+colsLeft = {1, 2, 3}
+
+# Row 1 configuration based off of this one:
+
+Q . . .
+. Q . .
+. . . .
+. . . .
+colsLeft = {2, 3}
+
+
+Q . . .
+. . Q .
+. . . .
+. . . .
+colsLeft = {1, 3}
+
+Q . . . 4
+. . . Q 4^2
+. . . .
+. . . . 4^4
+colsLeft = {1, 2}
