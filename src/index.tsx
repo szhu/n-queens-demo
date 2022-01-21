@@ -136,13 +136,17 @@ function App() {
         <div
           className={css`
             padding: 1em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1em;
           `}
         >
           {boards.map((board, i) => (
             <React.Fragment key={i}>
-              <div>Solution {i + 1}</div>
-              <BoardUi board={board} />
-              <br />
+              <div>
+                <div>Solution {i + 1}</div>
+                <BoardUi board={board} />
+              </div>
             </React.Fragment>
           ))}
         </div>
