@@ -12,22 +12,45 @@ function useForceRender() {
 }
 
 function useHashState<T>(
-  toHash: (value: T) => string,
+  toHash: (value: T, currentHash: string) => string,
   fromHash: (hash: string) => T,
 ) {
   const forceRender = useForceRender();
-  const value = fromHash(location.hash.substring(1));
+  const trimmedHash = location.hash.substring(1);
+  const value = fromHash(trimmedHash);
   function setValue(newValue: T) {
-    location.hash = "#" + toHash(newValue);
+    location.hash = "#" + toHash(newValue, trimmedHash);
     forceRender();
   }
+  useEffect(() => {
+    window.addEventListener("hashchange", forceRender);
+    return () => window.removeEventListener("hashchange", forceRender);
+  }, []);
   return [value, setValue] as const;
 }
 
+function useHashParamState<T>(
+  key: string,
+  toParam: (value: T) => string,
+  fromParam: (param: string) => T,
+) {
+  return useHashState<T>(
+    (newValue, currentHash) => {
+      let params = new URLSearchParams(currentHash);
+      params.set(key, toParam(newValue));
+      return params.toString();
+    },
+    (newHash) => {
+      return fromParam(new URLSearchParams(newHash).get(key));
+    },
+  );
+}
+
 function App() {
-  const [n, setN] = useHashState<number>(
+  const [n, setN] = useHashParamState<number>(
+    "n",
     (newN) => (Number.isNaN(newN) ? "" : "" + newN),
-    (hash) => (hash === "" || Number.isNaN(+hash) ? 4 : +hash),
+    (param) => (!param || Number.isNaN(+param) ? 4 : Math.max(0, +param)),
   );
   const [isCalculating, setIsCalculating] = useState(false);
 
